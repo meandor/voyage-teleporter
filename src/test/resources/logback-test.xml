@@ -1,0 +1,16 @@
+<configuration>
+    <contextName>transporter</contextName>
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%gray(%date{HH:mm:ss.SSS}) [%thread] %highlight(%-5level) %cyan(%logger{15}) %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="transporter" level="debug"/>
+
+    <root level="${log_level:-debug}">
+        <appender-ref ref="${log_appender:-consoleAppender}"/>
+    </root>
+
+</configuration>
