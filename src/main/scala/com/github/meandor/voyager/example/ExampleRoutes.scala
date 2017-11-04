@@ -1,4 +1,4 @@
-package com.github.meandor.voyagetransporter.example
+package com.github.meandor.voyager.example
 
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.model.StatusCodes

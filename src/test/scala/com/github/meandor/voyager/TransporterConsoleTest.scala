@@ -1,4 +1,4 @@
-package com.github.meandor.voyagetransporter
+package com.github.meandor.voyager
 
 import akka.http.scaladsl.model.{HttpRequest, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest

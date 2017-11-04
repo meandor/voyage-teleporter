@@ -1,4 +1,4 @@
-package com.github.meandor.voyagetransporter.example
+package com.github.meandor.voyager.example
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import com.github.meandor.transporter.platform.Platform.ActionPerformed

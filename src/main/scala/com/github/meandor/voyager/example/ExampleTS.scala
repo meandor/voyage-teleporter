@@ -1,4 +1,4 @@
-package com.github.meandor.voyagetransporter.example
+package com.github.meandor.voyager.example
 
 import com.github.meandor.transporter.Location
 import com.github.meandor.transporter.platform.{Energy, Target, TargetingScanner}

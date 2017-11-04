@@ -1,10 +1,10 @@
-package com.github.meandor.voyagetransporter
+package com.github.meandor.voyager
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.github.meandor.transporter.platform.Platform
-import com.github.meandor.voyagetransporter.example.{ExamplePTC, ExampleTS}
+import com.github.meandor.voyager.example.{ExamplePTC, ExampleTS}
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 import io.prometheus.client.hotspot.DefaultExports

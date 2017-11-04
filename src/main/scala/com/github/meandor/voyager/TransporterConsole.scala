@@ -1,4 +1,4 @@
-package com.github.meandor.voyagetransporter
+package com.github.meandor.voyager
 
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.server.Directives._
@@ -6,7 +6,7 @@ import akka.http.scaladsl.server.Route
 import com.lonelyplanet.prometheus.PrometheusResponseTimeRecorder
 import com.lonelyplanet.prometheus.api.MetricsEndpoint
 import com.typesafe.scalalogging.LazyLogging
-import com.github.meandor.voyagetransporter.example.ExampleRoutes
+import com.github.meandor.voyager.example.ExampleRoutes
 import io.prometheus.client.CollectorRegistry
 
 /**

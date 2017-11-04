@@ -4,7 +4,7 @@ apply plugin: 'application'
 
 group = "com.github.meandor"
 version = "0.1.0"
-mainClassName = "de.meandor.transporter.Transporter"
+mainClassName = "com.github.meandor.voyager.Transporter"
 
 repositories {
     mavenCentral()
