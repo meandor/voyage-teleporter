@@ -12,7 +12,7 @@ trait JsonSupport extends SprayJsonSupport {
 
   import DefaultJsonProtocol._
 
-  implicit val postsJsonFormat: RootJsonFormat[PostsMatter] = jsonFormat1(PostsMatter)
+  implicit val postsJsonFormat: RootJsonFormat[PostsMatter] = jsonFormat2(PostsMatter)
 
   implicit val postMatterJsonFormat: RootJsonFormat[PostMatter] = jsonFormat3(PostMatter)
 
