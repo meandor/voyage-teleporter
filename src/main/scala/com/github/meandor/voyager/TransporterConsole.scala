@@ -3,10 +3,10 @@ package com.github.meandor.voyager
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
+import com.github.meandor.voyager.httpbin.HttpBinRoutes
 import com.lonelyplanet.prometheus.PrometheusResponseTimeRecorder
 import com.lonelyplanet.prometheus.api.MetricsEndpoint
 import com.typesafe.scalalogging.LazyLogging
-import com.github.meandor.voyager.example.ExampleRoutes
 import io.prometheus.client.CollectorRegistry
 
 /**
@@ -17,7 +17,7 @@ import io.prometheus.client.CollectorRegistry
   * @param system ActorSystem from Transporter
   * @param actors Map of all available actors routes should be attached to
   */
-case class TransporterConsole(system: ActorSystem, actors: Map[String, ActorRef]) extends ExampleRoutes with LazyLogging {
+case class TransporterConsole(system: ActorSystem, actors: Map[String, ActorRef]) extends HttpBinRoutes with LazyLogging {
   private val prometheusRegistry: CollectorRegistry = PrometheusResponseTimeRecorder.DefaultRegistry
 
   private val metricsEndpoint = new MetricsEndpoint(prometheusRegistry)
@@ -25,5 +25,5 @@ case class TransporterConsole(system: ActorSystem, actors: Map[String, ActorRef]
   /**
     * All available routes to be exposed.
     */
-  val routes: Route = metricsEndpoint.routes ~ exampleRoutes
+  val routes: Route = metricsEndpoint.routes ~ httpBinRoutes
 }

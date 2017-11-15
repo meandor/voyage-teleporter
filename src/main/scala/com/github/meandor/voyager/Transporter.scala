@@ -4,7 +4,7 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.github.meandor.transporter.platform.Platform
-import com.github.meandor.voyager.example.{ExamplePTC, ExampleTS}
+import com.github.meandor.voyager.httpbin.PTC
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 import io.prometheus.client.hotspot.DefaultExports
@@ -31,8 +31,8 @@ object Transporter extends App with LazyLogging {
   implicit val executionContext: ExecutionContext = system.dispatcher
 
   // Register your actors here
-  val testPad = system.actorOf(Platform.props(ExamplePTC, ExampleTS), "testPad")
-  val actors = Map("examplePad" -> testPad)
+  val httpBinPad = system.actorOf(Platform.props(PTC, TS), "httpbin")
+  val actors = Map("httpbin" -> httpBinPad)
 
   logger.debug("Initializing standard metrics")
   DefaultExports.initialize()
