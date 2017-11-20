@@ -20,6 +20,14 @@ object PTC extends PhaseTransitionCoil with LazyLogging {
 
   override def energize(subject: Matter): Energy = {
     logger.info(s"Energizing PhaseTransitionCoil with: ${subject.id}, ${subject.owner}")
-    PostEnergy(subject.asInstanceOf[PostMatter])
+    subject match {
+      case matter: PostMatter =>
+        PostEnergy(matter)
+      case matter: PostsMatter =>
+        PostsEnergy(matter)
+      case _ =>
+        logger.warn("Could not energize PhaseTransitionCoil")
+        null
+    }
   }
 }

@@ -1,14 +1,16 @@
 package com.github.meandor.voyager.httpbin
 
-import akka.actor.ActorRef
+import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model.{ContentTypes, MessageEntity, StatusCodes}
-import akka.http.scaladsl.testkit.ScalatestRouteTest
+import akka.http.scaladsl.testkit.{RouteTestTimeout, ScalatestRouteTest}
 import com.github.meandor.transporter.platform.Platform
 import com.github.meandor.voyager.TS
 import com.github.meandor.voyager.httpbin.model.{HttpBinLocation, PostMatter, PostRequest, PostsMatter}
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{FeatureSpec, Matchers}
+
+import scala.concurrent.duration._
 
 class HttpBinTest extends FeatureSpec with Matchers with ScalatestRouteTest with ScalaFutures with HttpBinRoutes {
 
@@ -19,7 +21,9 @@ class HttpBinTest extends FeatureSpec with Matchers with ScalatestRouteTest with
   feature("Export data to https://httpbin.org/") {
     scenario("Post a collection of data to https://httpbin.org/") {
 
-      val postRequest = PostRequest(HttpBinLocation("foo"), PostMatter("42", "bar", Seq(PostsMatter("foobar", "foobaz"), PostsMatter("foobar42", "foobaz42"))))
+      implicit def default(implicit system: ActorSystem) = RouteTestTimeout(10.second)
+
+      val postRequest = PostRequest(HttpBinLocation("some"), PostMatter("42", "bar", Seq(PostsMatter("foobar", "foobaz"), PostsMatter("foobar42", "foobaz42"))))
       val postEntity = Marshal(postRequest).to[MessageEntity].futureValue
 
       Post("/httpbin").withEntity(postEntity) ~> httpBinRoutes ~> check {
@@ -29,7 +33,7 @@ class HttpBinTest extends FeatureSpec with Matchers with ScalatestRouteTest with
         contentType shouldBe ContentTypes.`application/json`
 
         // and we know what message we're expecting back:
-        entityAs[String] shouldBe "{\"description\":\"Unsuccessful Beam\"}"
+        entityAs[String] shouldBe "{\"description\":\"Successful Beam\"}"
       }
     }
   }
